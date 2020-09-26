@@ -2,7 +2,6 @@ package dar.mar.rentcarapi.domain.carclient;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import dar.mar.rentcarapi.external.carclient.DummyCarClientRepository;
 
 import java.util.List;
 
