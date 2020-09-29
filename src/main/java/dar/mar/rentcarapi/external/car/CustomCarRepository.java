@@ -1,4 +1,9 @@
 package dar.mar.rentcarapi.external.car;
 
-public class CustomCarRepository {
+import dar.mar.rentcarapi.web.car.SearchParams;
+
+import java.util.List;
+
+public interface CustomCarRepository {
+    List<CarEntity> findWithSearchParams(SearchParams searchParams);
 }

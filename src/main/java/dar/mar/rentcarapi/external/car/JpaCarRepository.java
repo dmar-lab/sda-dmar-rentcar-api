@@ -1,4 +1,9 @@
 package dar.mar.rentcarapi.external.car;
 
-public interface JpaCarRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface JpaCarRepository extends
+        JpaRepository<CarEntity, Integer>,
+        CustomCarRepository {
+    // tu zapytania dla bazy
 }
