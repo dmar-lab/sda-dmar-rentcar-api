@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,9 +20,9 @@ public class RentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer rentNo;
+    private Integer id;
     private LocalDate rentDate;
-    private LocalTime rentHour; // pozor!
+    private int rentHour;
     private Integer rentPrice;
 //    private Integer carId;    te pola powodowaly duplikacje
 //    private Integer carClientId;
@@ -35,4 +34,9 @@ public class RentEntity {
     @ManyToOne
     @JoinColumn(name = "car_client_id")
     private CarClientEntity carClient;
+
+    public void changeRentTime(LocalDate date, int rentHour) {
+        this.rentDate = date;
+        this.rentHour = rentHour;
+    }
 }

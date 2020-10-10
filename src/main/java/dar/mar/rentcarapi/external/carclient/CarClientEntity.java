@@ -1,12 +1,14 @@
 package dar.mar.rentcarapi.external.carclient;
 
 import dar.mar.rentcarapi.domain.carclient.CarClient;
+import dar.mar.rentcarapi.external.rent.RentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 // import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class CarClientEntity {
 
     @Column(length = 16, unique = true)
     private String creditCardNo;
+
+    @OneToMany(mappedBy = "carClient")
+    private Set<RentEntity> rents;
 
     public void updateFromDomain(CarClient carClient) {
         this.name = carClient.getName();

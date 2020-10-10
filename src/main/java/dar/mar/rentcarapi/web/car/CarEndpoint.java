@@ -11,14 +11,28 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/car")  // "/api/car"
 @RequiredArgsConstructor
 public class CarEndpoint {
 
-    private final CarService service;
+    private final CarService carService;
+
+    /*@PostMapping
+    ResponseEntity createCar(@RequestBody @Valid Car car, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errMsgs = bindingResult.getAllErrors().stream()
+                    .map(err -> err.getDefaultMessage())
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.status(400).body(errMsgs);
+        } else {
+            carService.createCar(car);
+            return ResponseEntity.status(201).build();
+        }
+    }*/
 
     @PostMapping("/search")
     List<Car> searchByParams(@RequestBody SearchParams searchParams) {
-        return service.findByParams(searchParams);
+        return carService.findByParams(searchParams);
     }
 }

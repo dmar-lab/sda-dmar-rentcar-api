@@ -15,4 +15,8 @@ public class CarService {
     public List<Car> findByParams(SearchParams searchParams) {
         return carRepository.findByParams(searchParams);
     }
+
+    /*public void createCar(Car car) {
+        carRepository.createCar(car);
+    }*/
 }

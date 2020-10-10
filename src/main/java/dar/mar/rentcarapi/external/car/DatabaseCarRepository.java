@@ -1,10 +1,10 @@
 package dar.mar.rentcarapi.external.car;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import dar.mar.rentcarapi.domain.car.Car;
 import dar.mar.rentcarapi.domain.car.CarRepository;
 import dar.mar.rentcarapi.web.car.SearchParams;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.function.Function;
@@ -15,6 +15,18 @@ import java.util.stream.Collectors;
 public class DatabaseCarRepository implements CarRepository {
 
     private final JpaCarRepository jpaCarRepository;
+
+    /*@Override
+    public void createCar(Car car) {
+        CarEntity entity = CarEntity.builder()
+                .mark(car.getMark())
+                .type(car.getType())
+                .buildYear(car.getBuildYear())
+                .distance(car.getDistance())
+                .colour(car.getColour())
+                .build();
+        jpaCarRepository.save(entity);
+    }*/
 
     @Override
     public List<Car> findByParams(SearchParams searchParams) {

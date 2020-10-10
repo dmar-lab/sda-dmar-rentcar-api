@@ -60,11 +60,17 @@ public class DatabaseCarClientRepository implements CarClientRepository {
     @Override
     public Optional<CarClient> getByCreditCardNo(String creditCardNo) {
         return carClientRepository.findByCreditCardNo(creditCardNo)
-                .map(mapToDomain());
+                .map(ent -> mapToDomain(ent));
     }
 
     private Function<CarClientEntity, CarClient> mapToDomain() {
         return ent -> new CarClient(ent.getId(), ent.getName(),
+                ent.getSurname(), ent.getDrivingLicenceNo(),
+                ent.getNationality(), ent.getCreditCardNo());
+    }
+
+    private CarClient mapToDomain(CarClientEntity ent) {
+        return new CarClient(ent.getId(), ent.getName(),
                 ent.getSurname(), ent.getDrivingLicenceNo(),
                 ent.getNationality(), ent.getCreditCardNo());
     }

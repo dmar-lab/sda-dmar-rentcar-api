@@ -13,3 +13,4 @@ public class RentcarApiApplication {
     }
 
 }
+// zwykle merguje ten ktoremu ten branch jest potrzebny
