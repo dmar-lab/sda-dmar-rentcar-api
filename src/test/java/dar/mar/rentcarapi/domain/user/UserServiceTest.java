@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static dar.mar.rentcarapi.domain.user.User.builder;
@@ -33,6 +34,40 @@ class UserServiceTest {
         Mockito.verify(userRepository).getByUsername("Rafal");
         assertEquals("Rafal", result.getUsername());
 
+    }
+
+    @Test
+    void testShouldFindUserByUsername() {
+        //given
+        String username = "username";
+        //when
+        Mockito.when(userRepository.getByUsername(username)).thenReturn(Optional.of(User.builder()
+                .id(1)
+                .username("username")
+                .password("password")
+                .role("user")
+                .build()));
+
+        User result = userService.findUserByName(username);
+        //then
+        Mockito.verify(userRepository).getByUsername(username);
+        assertEquals("username", result.getUsername());
+        assertEquals(1, result.getId());
+        assertEquals("user", result.getRole());
+        assertEquals("password", result.getPassword());
+
+    }
+
+    @Test
+    void testShouldThrowExceptionForIncorrectUsername() {
+        //given
+        String username = "user";
+        //when
+        Mockito.when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> userService.findUserByName(username));
+        //then
+        Mockito.verify(userRepository).getByUsername(username);
+        assertEquals("Unknown user", ex.getMessage());
     }
 
 }

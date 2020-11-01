@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -18,5 +20,12 @@ public class UserService {
         }
         user.encodePassword(passwordEncoder, user.getPassword());
         userRepository.create(user);
+    }
+
+    public User findUserByName(String name){
+        Optional<User> username = userRepository.getByUsername(name);
+        if (username.isEmpty()){
+            throw new IllegalArgumentException("Unknown user");
+        } else return username.get();
     }
 }
